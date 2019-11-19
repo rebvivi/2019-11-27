@@ -39,15 +39,15 @@ buckets = (1, 1, 6, 12)     # define the number of buckets for each state value 
 # note: setting the bucket to 1 for the first 2 numbers is equivalent to ignoring these parameters
 upper_bounds = [
         env.observation_space.high[0], 
-        0.5, 
+        15, 
         env.observation_space.high[2], 
-        math.radians(50)
+        15
         ]
 lower_bounds = [
         env.observation_space.low[0], 
-        -0.5, 
+        -15, 
         env.observation_space.low[2], 
-        -math.radians(50)]
+        -15]
 
 
 # HYPERPARAMETERS

@@ -55,8 +55,8 @@ class CartPoleEnv(gym.Env):
         self.total_mass = (self.masspole + self.masscart)
         self.length = 0.152 # actually half the pole's length
         self.polemass_length = (self.masspole * self.length)
-        self.force_mag = -20.0
-        self.tau = 0.02  # seconds between state updates
+        self.force_mag = -50.0
+        self.tau = 0.01  # seconds between state updates
         self.kinematics_integrator = 'euler'
 
         # Angle at which to fail the episode
