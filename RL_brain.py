@@ -129,12 +129,12 @@ class DeepQNetwork:
         self.memory_counter += 1
    
    #定義 policy
-    def choose_action(self, observation): #根據環境的觀測值選擇 action 的機制
+    def choose_action(self, observation,epsilon): #根據環境的觀測值選擇 action 的機制
         # to have batch dimension when feed into tf placeholder
         observation = observation[np.newaxis, :] 
         #observation 輸入是 1 維數據 , 為了讓 tensorflow 能夠處理 , 要把維度增加 1 , 變成 2 維
 
-        if np.random.uniform() < self.epsilon: #選最好動作
+        if np.random.random() > epsilon: #選最好動作
             # forward feed the observation and get q value for every actions
             actions_value = self.sess.run(
                 self.q_eval, feed_dict={self.s: observation}) #放入 q_evaluation 進行分析 , 輸出 action  的值
