@@ -16,9 +16,9 @@ import cartpole_gym
 env = gym.make('CartPoleEnv11-v0')
 n_actions = env.action_space.n
 n_states = env.observation_space.shape[0]
-print("Action space size: ", n_actions)
-print("State space size: ", n_states)
-
+print("Action space size: \n", n_actions)
+print("State space size:\n ", n_states)
+'''
 print('states high value:')
 print(env.observation_space.high[0])
 print(env.observation_space.high[1])
@@ -30,10 +30,10 @@ print(env.observation_space.low[0])
 print(env.observation_space.low[1])
 print(env.observation_space.low[2])
 print(env.observation_space.low[3])
-
+'''
 
 # DOWN-SCALE THE FEATURE SPACE TO DISCRETE RANGE
-buckets = (1, 1, 6, 12)     # define the number of buckets for each state value (x, x', theta, theta')
+buckets = (3, 3, 6, 12)     # define the number of buckets for each state value (x, x', theta, theta')
 
 # define upper and lower bounds for each state value
 # note: setting the bucket to 1 for the first 2 numbers is equivalent to ignoring these parameters
@@ -51,7 +51,7 @@ lower_bounds = [
 
 
 # HYPERPARAMETERS
-n_episodes = 1000           # Total train episodes
+n_episodes = 500           # Total train episodes
 n_steps = 200               # Max steps per episode
 min_alpha = 0.1             # learning rate
 min_epsilon = 0.1           # exploration rate
@@ -120,7 +120,7 @@ for episode in range(n_episodes):
 
         # at the end of the episode
         if done:
-            print('Episode:{}/{} finished with a total reward of: {}'.format(episode, n_episodes, episode_rewards))
+            #print('Episode:{}/{} finished with a total reward of: {}'.format(episode, n_episodes, episode_rewards))
             break
 
     # append the episode cumulative reward to the reward list
