@@ -132,15 +132,16 @@ x = range(n_episodes)
 plt.plot(x, rewards)
 plt.xlabel('episode')
 plt.ylabel('Training cumulative reward')
-plt.savefig('Q_learning_CART.png', dpi=300)
+plt.savefig('q_learning_train_reward.png', dpi=300)
 plt.show()
 
+rewardss=[]
 # TEST PHASE
 for episode in range(30):
     current_state = env.reset()
     current_state = discretize(current_state)
     episode_rewards = 0
-
+    
 
     for t in range(n_steps):
         env.render()
@@ -155,5 +156,12 @@ for episode in range(30):
         if done:
             print('Test episode finished with a total reward of: {}'.format(episode_rewards))
             break
- 
+    rewardss.append(episode_rewards)
+x = range(30)
+plt.plot(x, rewardss)
+plt.xlabel('episode')
+plt.ylabel('Testing cumulative reward')
+plt.savefig('q_learning_test_reward.png', dpi=300)
+plt.show()
+
 env.close()
