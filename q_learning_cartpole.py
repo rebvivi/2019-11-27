@@ -97,11 +97,18 @@ def get_alpha(t):
 
 # TRAINING PHASE
 rewards = [] 
-
+p=[]
+pdot=[]
+theta=[]
+thetadot=[]
 for episode in range(n_episodes):
     current_state = env.reset()
+    a,b,c,d=current_state 
+    p.append(a)
+    pdot.append(b)
+    theta.append(c)
+    thetadot.append(d)
     current_state = discretize(current_state)
-
     alpha = get_alpha(episode)
     epsilon = get_epsilon(episode)
 
@@ -111,6 +118,11 @@ for episode in range(n_episodes):
         # env.render()
         action = epsilon_policy(current_state, epsilon)
         new_state, reward, done, _ = env.step(action)
+        e,f,g,h=new_state
+        p.append(e)
+        pdot.append(f)
+        theta.append(g)
+        thetadot.append(h)
         new_state = discretize(new_state)
         update_q(current_state, action, reward, new_state, alpha)
         current_state = new_state
@@ -134,6 +146,37 @@ plt.xlabel('episode')
 plt.ylabel('Training cumulative reward')
 plt.savefig('q_learning_train_reward.png', dpi=300)
 plt.show()
+
+
+#plot x
+plt.plot(np.arange(len(p)), p)
+plt.xlabel('training steps')
+plt.ylabel('x')
+plt.savefig('q_learning_x.png', dpi=300)
+plt.show()
+
+#plot xdot
+plt.plot(np.arange(len(pdot)), pdot)
+plt.xlabel('training steps')
+plt.ylabel('xdot')
+plt.savefig('q_learning_xdot.png', dpi=300)
+plt.show()
+
+#plot theta
+plt.plot(np.arange(len(theta)), theta)
+plt.xlabel('training steps')
+plt.ylabel('theta')
+plt.savefig('q_learning_theta.png', dpi=300)
+plt.show()
+
+#plot thetadot
+plt.plot(np.arange(len(thetadot)), thetadot)
+plt.xlabel('training steps')
+plt.ylabel('thetadot')
+plt.savefig('q_learning_thetadot.png', dpi=300)
+plt.show()
+
+
 
 rewardss=[]
 # TEST PHASE

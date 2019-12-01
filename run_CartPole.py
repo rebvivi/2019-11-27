@@ -58,9 +58,8 @@ for i_episode in range(n_episodes):
         RL.store_transition(observation, action, reward, observation_)
 
         ep_r += reward  # 累計 reward
-        total_steps += 1
-        observation = observation_
-        if total_steps >500:
+
+        if total_steps >100:
             RL.learn()  # 進行學習
 
         if done:  # 回合結束就跳到下一個回合
@@ -68,9 +67,9 @@ for i_episode in range(n_episodes):
                   'ep_r: ', round(ep_r, 2),
                   ' epsilon: ', round(RL.epsilon, 2))
             break
-
-        
-        
+        total_steps += 1
+        observation = observation_
+      
     rewards.append(ep_r)
 
 
